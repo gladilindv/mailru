@@ -9,16 +9,15 @@
 class CSpamFilter {
 
 public:
-    explicit CSpamFilter() = default;
+    explicit CSpamFilter(const std::string&);
     ~CSpamFilter() = default;
 
     CSpamFilter& operator=(const CSpamFilter&) = delete; // disallow use of assignment operator
     CSpamFilter& operator= (CSpamFilter &&) = default; // move assignment operator
     CSpamFilter(const CSpamFilter&) = delete; // disallow copy construction
-
     CSpamFilter(CSpamFilter&&) = delete; // disallow move construction
 
-    bool check(const char*);
+    int check(const char*);
 
 
 };
