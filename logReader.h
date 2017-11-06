@@ -24,11 +24,11 @@ public:
     bool open(const char*);
     void close();
 
-    bool setFilter(const char*);
+    bool addFilter(const char*);
     bool getNextLine(char*, const int);
 
 private:
-    std::regex mFilter;
+    std::vector<std::regex> mFilters;
     std::ifstream mStream;
 };
 

@@ -22,7 +22,7 @@ void CLogReader::close(){
     mStream.close();
 }
 
-bool CLogReader::setFilter(const char* aFilter){
+bool CLogReader::addFilter(const char* aFilter){
     // replace
     // order*closed => (order)(.*)(closed)
     //
@@ -75,7 +75,11 @@ bool CLogReader::setFilter(const char* aFilter){
     if(isChar)
         out += ')';
 
-    mFilter.assign(out, std::regex::ECMAScript);
+    std::regex filter;
+    filter.assign(out, std::regex::ECMAScript);
+
+    mFilters.push_back(filter);
+
     return true;
 }
 
@@ -84,20 +88,22 @@ bool CLogReader::getNextLine(char* aBuf, const int aSize){
         return false;
 
     std::string line;
-    bool result;
+    bool result = false;
     do {
         std::getline(mStream, line);
         if (mStream.fail())
             return false;
 
         std::smatch what;
-        result = std::regex_search(line, what, mFilter);
-        if (result) {
-            auto rest = line.length() - what.position();
-            if(aSize < rest)
-                rest = aSize;
-
-            memcpy(aBuf, line.substr(what.position(), rest).c_str(), rest);
+        for(const auto& filter : mFilters){
+            result = std::regex_search(line, what, filter);
+            if (result) {
+                auto rest = line.length() - what.position();
+                if (aSize < rest)
+                    rest = aSize;
+                memcpy(aBuf, line.substr(what.position(), rest).c_str(), rest);
+                break;
+            }
         }
 
     }
