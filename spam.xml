@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<rules>
+    <rule name="advert" id="1">
+        <item>
+            <from>*</from>
+            <to>*</to>
+            <msg>отправьте смс(бесплатно)</msg>
+        </item>
+        <item>
+            <from>*</from>
+            <to>*</to>
+            <msg>работа на дому</msg>
+        </item>
+    </rule>
+    <rule name="duplicate" id="2">
+        <item>
+            <from>const</from>
+            <to>*</to>
+            <msg>const</msg>
+        </item>
+    </rule>
+    <rule name="ddos" id="3">
+        <item>
+            <from>*</from>
+            <to>const</to>
+            <msg>const</msg>
+        </item>
+    </rule>
+    <rule name="badUserName" id="4">
+        <item>
+            <from>\d{7,}</from>
+            <to>*</to>
+            <msg>*</msg>
+        </item>
+    </rule>
+</rules>
