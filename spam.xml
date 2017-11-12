@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <rules>
-    <rule name="advert" id="1">
+    <rule id="1" name="advert" >
         <item>
             <from>*</from>
             <to>*</to>
@@ -12,21 +12,21 @@
             <msg>работа на дому</msg>
         </item>
     </rule>
-    <rule name="duplicate" id="2">
+    <rule id="2" name="duplicate">
         <item>
             <from>const</from>
             <to>*</to>
             <msg>const</msg>
         </item>
     </rule>
-    <rule name="ddos" id="3">
+    <rule id="3" name="ddos">
         <item>
             <from>*</from>
             <to>const</to>
             <msg>const</msg>
         </item>
     </rule>
-    <rule name="badUserName" id="4">
+    <rule id="4" name="badUserName" >
         <item>
             <from>\d{7,}</from>
             <to>*</to>
